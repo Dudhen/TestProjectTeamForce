@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% extends "candidates/base_temp.html" %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>
+      {% block title %}
+      Список кандидатов
+      {% endblock %}
+  </title>
+</head>
+<body>
+{% block content %}
+{% if request.user.is_authenticated %}
+    <h2>Добро пожаловать, {{ request.user.candidate.name }}!</h2>
+    <form action="/profile/">
+        <button>Личный кабинет</button>
+    </form>
+    <p></p>
+    <form action="/logout/">
+        <button>Выйти с сайта</button>
+    </form>
+{% else %}
+    <h3>Вы не вошли на сайт!</h3>
+    <form action="/login/">
+        <button>Войти на сайт</button>
+    </form>
+{% endif %}
+<h2>Кандидаты:</h2>
+{% if object_list %}
+<ul>
+    {% for candidate in object_list %}
+    <li>
+        <h3><a href="/candidates/{{candidate.id}}/"> {{ candidate.surname }} {{ candidate.name }} {{ candidate.patronymic }}</a></h3>
+            Навыки:
+            {% for i_skill in candidate.skills.all %}
+                {{ i_skill }}
+            {% endfor %}
+            <p>Дата регистрации: {{ candidate.created_at }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<h3><p>Кандидатов нет.</p></h3>
+{% endif %}
+{% endblock %}
+</body>
+</html>

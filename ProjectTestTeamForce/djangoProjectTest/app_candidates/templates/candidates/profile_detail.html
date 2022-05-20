@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% extends "candidates/base_temp.html" %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>
+      {% block title %}
+      Личный кабинет {{ object.user.username }}
+      {% endblock %}
+  </title>
+</head>
+<body>
+{% block content %}
+<h2>Личный кабинет {{ object.user.username }}</h2>
+<ul>
+        <p>
+            ФИО: {{ object.surname }} {{ object.name }} {{ object.patronymic }}
+        </p>
+        <p>
+            Навыки:
+        {% for i_skill in object.skills.all %}
+            {{ i_skill }}
+        {% endfor %}</p>
+        <form action="/profile/skill_add/">
+            <button>+Добавить навык</button>
+        </form>
+        <p>
+            Иностранные языки:
+        {% for i_language in object.languages.all %}
+            {{ i_language }}
+        {% endfor %}</p>
+        <form action="/profile/language_add/">
+            <button>+Добавить язык</button>
+        </form>
+        <p>
+            Увлечения: {{ object.hobbies }}
+        </p>
+        <p>
+            Фото профиля:
+        </p>
+        {% if object.photos %}
+        {% for photo in object.photos.all %}
+            <img src="/media/{{photo.image}}" alt="connect" style="max-height:300px">
+        {% endfor %}
+        {% else %}
+        <p>
+            Фото профиля нет
+        </p>
+        {% endif %}
+        <p>
+            Дата регистрации: {{ object.created_at }}
+        </p>
+</ul>
+<form action="/candidates/">
+    <button>Назад</button>
+</form>
+{% endblock %}
+</body>
+</html>

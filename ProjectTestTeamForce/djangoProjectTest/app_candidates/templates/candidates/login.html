@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% extends "candidates/base_temp.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Вход в систему{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+<h2>Вход на сайт</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Войти</button>
+</form>
+<p></p>
+<form action="/registration/">
+    <button>Зарегистрироваться</button>
+</form>
+<p></p>
+<form action="/candidates/">
+    <button>Продолжить без авторизации пользователя</button>
+</form>
+{% endblock %}
+</body>
+</html>

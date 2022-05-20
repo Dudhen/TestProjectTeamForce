@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends "candidates/base_temp.html" %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Добавить язык{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+<h2>Добавить язык</h2>
+    <form method="post" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+        Выберете иностранные языки из списка:
+            {{ form.as_p }}
+        <button type="submit">Добавить</button>
+    </form>
+<p></p>
+<form action="/profile/">
+    <button>Назад</button>
+</form>
+{% endblock %}
+</body>
+</html>

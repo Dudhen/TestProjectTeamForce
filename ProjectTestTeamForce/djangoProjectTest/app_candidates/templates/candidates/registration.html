@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends "candidates/base_temp.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Регистрация{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+    <h2>Регистрация</h2>
+    <form method="post" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        Выберете навыки из списка:
+            {{ skills_form.as_p }}
+        Выберете иностранные языки, которыми вы владеете, из списка:
+            {{ language_form.as_p }}
+        {{ photo_form.as_p }}
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+<p><form action="/login/">
+   <button>Назад</button>
+  </form></p>
+{% endblock %}
+</body>
+</html>
